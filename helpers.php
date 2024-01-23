@@ -11,7 +11,7 @@ function loadView($name)
     if (file_exists($viewPath)) {
         require($viewPath);
     } else {
-        echo "View {$name} not found!";
+        return "View: {$name} not found!";
     }
 }
 
@@ -22,7 +22,7 @@ function loadPartial($name)
     if (file_exists($partialPath)) {
         require($partialPath);
     } else {
-        echo "View {$name} not found!";
+        return "Partial: {$name} not found!";
     }
 }
 

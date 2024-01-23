@@ -1,2 +1,1 @@
-<?php
-loadView("home");
+<?= loadView("home") ?>
