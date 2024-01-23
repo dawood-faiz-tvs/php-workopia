@@ -25,3 +25,18 @@ function loadPartial($name)
         echo "View {$name} not found!";
     }
 }
+
+function d($value)
+{
+    echo "<pre>";
+    var_dump($value);
+    echo "</pre>";
+}
+
+function dd($value)
+{
+    echo "<pre>";
+    var_dump($value);
+    echo "</pre>";
+    die();
+}
