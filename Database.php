@@ -11,9 +11,22 @@ class Database
         ];
 
         try {
-            $pdo = new PDO($dsn, $config['username'], $config['password']);
+            $this->conn = new PDO($dsn, $config['username'], $config['password'], $options);
         } catch (PDOEXCEPTION $e) {
-            throw new Exception("Database Connection Failed: " . $e->getMessage());
+            echo "Database Connection Failed: " . $e->getMessage();
+            exit;
+        }
+    }
+
+    public function query($query)
+    {
+        try {
+            $stmt = $this->conn->prepare($query);
+            $stmt->execute();
+            return $stmt;
+        } catch (PDOEXCEPTION $e) {
+            echo "Query Failed to Execute: " . $e->getMessage();
+            exit;
         }
     }
 }
