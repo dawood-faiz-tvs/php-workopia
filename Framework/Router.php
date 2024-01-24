@@ -6,12 +6,15 @@ class Router
 {
     protected $routes = [];
 
-    public function resiterRoute($method, $uri, $controller)
+    public function resiterRoute($method, $uri, $action)
     {
+        list($controller, $controllerMethod) = explode('@', $action);
+
         $this->routes[] = [
             'method' => $method,
             'uri' => $uri,
-            'controller' => $controller
+            'controller' => $controller,
+            'controllerMethod' => $controllerMethod
         ];
     }
 
@@ -46,7 +49,11 @@ class Router
     {
         foreach ($this->routes as $route) {
             if (strtolower($route['uri']) === $uri && $route['method'] === $method) {
-                require(basePath('App/' . $route['controller']));
+                $controller = 'App\\Controllers\\' . $route['controller'];
+                $controllerMethod = $route['controllerMethod'];
+
+                $controllerInstance = new $controller();
+                $controllerInstance->$controllerMethod();
                 return;
             }
         }
