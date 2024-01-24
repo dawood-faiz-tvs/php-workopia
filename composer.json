@@ -1,0 +1,17 @@
+{
+    "name": "dawood-faiz-tvs/php-workopia",
+    "description": "Job listing application",
+    "autoload": {
+        "psr-4": {
+            "Framework\\": "Framework/",
+            "App\\": "App/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dawood Faiz",
+            "email": "dawood.faiz.tvs@gmail.com"
+        }
+    ],
+    "require": {}
+}
