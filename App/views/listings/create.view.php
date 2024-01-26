@@ -7,81 +7,86 @@
 <section class="flex justify-center items-center mt-20">
     <div class="bg-white p-8 rounded-lg shadow-md w-full md:w-600 mx-6">
         <h2 class="text-4xl text-center font-bold mb-4">Create Job Listing</h2>
-        <!-- <div class="message bg-red-100 p-3 my-3">This is an error message.</div>
-        <div class="message bg-green-100 p-3 my-3">
-          This is a success message.
-        </div> -->
+        <div class="text-center message bg-green-100 px-4 py-4 my-3">
+            <?= $_GET['success'] ?? '' ?>
+        </div>
         <form method="POST" action="/listings">
             <h2 class="text-2xl font-bold mb-6 text-center text-gray-500">
                 Job Info
             </h2>
             <div class="mb-4">
-                <input type="text" name="title" placeholder="Job Title" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= isset($listing['title']) ? $listing['title'] : '' ?>" />
+                <input type="text" name="title" placeholder="Job Title" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['title'] ?? '' ?>" />
                 <div class="message bg-red-100 my-3 px-4 py-4">
-                    <?= isset($errors['title']) ? $errors['title'] : '' ?>
+                    <?= $errors['title'] ?? '' ?>
                 </div>
             </div>
             <div class="mb-4">
-                <textarea name="description" placeholder="Job Description" class="w-full px-4 py-2 border rounded focus:outline-none"><?= isset($listing['description']) ? $listing['description'] : '' ?></textarea>
+                <textarea name="description" placeholder="Job Description" class="w-full px-4 py-2 border rounded focus:outline-none"><?= $listing['description'] ?? '' ?></textarea>
                 <div class="message bg-red-100 my-3 px-4 py-4">
-                    <?= isset($errors['description']) ? $errors['description'] : '' ?>
+                    <?= $errors['description'] ?? '' ?>
                 </div>
             </div>
             <div class="mb-4">
-                <input type="text" name="salary" placeholder="Annual Salary" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= isset($listing['salary']) ? $listing['salary'] : '' ?>" />
+                <input type="text" name="salary" placeholder="Annual Salary" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['salary'] ?? '' ?>" />
                 <div class="message bg-red-100 my-3 px-4 py-4">
-                    <?= isset($errors['salary']) ? $errors['salary'] : '' ?>
+                    <?= $errors['salary'] ?? '' ?>
                 </div>
             </div>
             <div class="mb-4">
-                <input type="text" name="requirements" placeholder="Requirements" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= isset($listing['requirements']) ? $listing['requirements'] : '' ?>" />
+                <input type="text" name="requirements" placeholder="Requirements" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['requirements'] ?? '' ?>" />
                 <div class="message bg-red-100 my-3 px-4 py-4">
-                    <?= isset($errors['requirements']) ? $errors['requirements'] : '' ?>
+                    <?= $errors['requirements'] ?? '' ?>
                 </div>
             </div>
             <div class="mb-4">
-                <input type="text" name="benefits" placeholder="Benefits" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= isset($listing['benefits']) ? $listing['benefits'] : '' ?>" />
+                <input type="text" name="benefits" placeholder="Benefits" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['benefits'] ?? '' ?>" />
                 <div class="message bg-red-100 my-3 px-4 py-4">
-                    <?= isset($errors['benefits']) ? $errors['benefits'] : '' ?>
+                    <?= $errors['benefits'] ?? '' ?>
+                </div>
+            </div>
+            <div class="mb-4">
+                <input type="text" name="tags" placeholder="Tags" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['tags'] ?? '' ?>" />
+                <div class="message bg-red-100 my-3 px-4 py-4">
+                    <?= $errors['tags'] ?? '' ?>
                 </div>
             </div>
             <h2 class="text-2xl font-bold mb-6 text-center text-gray-500">
                 Company Info & Location
             </h2>
             <div class="mb-4">
-                <input type="text" name="company" placeholder="Company Name" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= isset($listing['company']) ? $listing['company'] : '' ?>" />
+                <input type="text" name="company" placeholder="Company Name" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['company'] ?? '' ?>" />
                 <div class="message bg-red-100 my-3 px-4 py-4">
-                    <?= isset($errors['company']) ? $errors['company'] : '' ?>
+                    <?= $errors['company'] ?? '' ?>
                 </div>
             </div>
             <div class="mb-4">
-                <input type="text" name="address" placeholder="Address" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= isset($listing['address']) ? $listing['address'] : '' ?>" />
+                <input type="text" name="address" placeholder="Address" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['address'] ?? '' ?>" />
                 <div class="message bg-red-100 my-3 px-4 py-4">
-                    <?= isset($errors['address']) ? $errors['address'] : '' ?>
+                    <?= $errors['address'] ?? '' ?>
                 </div>
             </div>
             <div class="mb-4">
-                <input type="text" name="city" placeholder="City" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= isset($listing['city']) ? $listing['city'] : '' ?>" />
+                <input type="text" name="city" placeholder="City" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['city'] ?? '' ?>" />
                 <div class="message bg-red-100 my-3 px-4 py-4">
-                    <?= isset($errors['city']) ? $errors['city'] : '' ?>
+                    <?= $errors['city'] ?? '' ?>
                 </div>
             </div>
             <div class="mb-4">
-                <input type="text" name="state" placeholder="State" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= isset($listing['state']) ? $listing['state'] : '' ?>" />
+                <input type="text" name="state" placeholder="State" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['state'] ?? '' ?>" />
                 <div class="message bg-red-100 my-3 px-4 py-4">
-                    <?= isset($errors['state']) ? $errors['state'] : '' ?>
+                    <?= $errors['state'] ?? '' ?>
                 </div>
             </div>
             <div class="mb-4">
-                <input type="text" name="phone" placeholder="Phone" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= isset($listing['phone']) ? $listing['phone'] : '' ?>" />
+                <input type="text" name="phone" placeholder="Phone" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['phone'] ?? '' ?>" />
                 <div class="message bg-red-100 my-3 px-4 py-4">
-                    <?= isset($errors['phone']) ? $errors['phone'] : '' ?>
+                    <?= $errors['phone'] ?? '' ?>
                 </div>
             </div>
             <div class="mb-4">
-                <input type="email" name="email" placeholder="Email Address For Applications" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= isset($listing['email']) ? $listing['email'] : '' ?>" />
+                <input type="email" name="email" placeholder="Email Address For Applications" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $listing['email'] ?? '' ?>" />
                 <div class="message bg-red-100 my-3 px-4 py-4">
-                    <?= isset($errors['email']) ? $errors['email'] : '' ?>
+                    <?= $errors['email'] ?? '' ?>
                 </div>
             </div>
             <button class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 my-3 rounded focus:outline-none">

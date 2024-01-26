@@ -51,3 +51,19 @@ function sanitize($dirty)
 {
     return filter_var($dirty, FILTER_SANITIZE_SPECIAL_CHARS);
 }
+
+function redirect($url)
+{
+    header("Location: {$url}");
+    exit;
+}
+
+function placeholder($field)
+{
+    return ":{$field}";
+}
+
+function nullable($input)
+{
+    return $input === "" ? NULL : $input;
+}

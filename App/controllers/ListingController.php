@@ -17,7 +17,6 @@ class ListingController
 
     public function index()
     {
-        dd(Validation::match('com', 'com'));
         $listings = $this->db->query("SELECT * FROM listings")->fetchAll();
 
         loadView("listings/index", [
@@ -68,10 +67,18 @@ class ListingController
         $requiredFields = [
             'title',
             'description',
+            'salary',
+            'requirements',
+            'benefits',
+            'company',
+            'address',
+            'city',
+            'state',
+            'phone',
+            'email',
         ];
 
         $errors = [];
-
         foreach ($requiredFields as $field) {
             if (empty($newListingData[$field]) || !Validation::string($newListingData[$field])) {
                 $errors[$field] = "The " . ucfirst($field) . " field is required";
@@ -84,7 +91,18 @@ class ListingController
                 'listing' => $newListingData
             ]);
         } else {
-            echo "Success";
+            $fieldsArray = array_keys($newListingData);
+            $fields = implode(', ', $fieldsArray);
+
+            $valuesArray = array_map('placeholder', $fieldsArray);
+            $values = implode(', ', $valuesArray);
+
+            $newListingData = array_map('nullable', $newListingData);
+
+            $query = "INSERT INTO listings ({$fields}) VALUES ({$values})";
+            $this->db->query($query, $newListingData);
+
+            redirect('listings/create?success=' . urlencode('Listing created successfully'));
         }
     }
 }
