@@ -1,4 +1,5 @@
 <?php
+session_start();
 require('../helpers.php');
 require(__DIR__ . '/../vendor/autoload.php');
 

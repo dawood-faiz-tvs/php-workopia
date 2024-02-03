@@ -7,9 +7,7 @@
 <section class="flex justify-center items-center mt-20">
     <div class="bg-white p-8 rounded-lg shadow-md w-full md:w-600 mx-6">
         <h2 class="text-4xl text-center font-bold mb-4">Create Job Listing</h2>
-        <div class="text-center message bg-green-100 px-4 py-4 my-3">
-            <?= $_GET['success'] ?? '' ?>
-        </div>
+        <?= loadPartial("message") ?>
         <form method="POST" action="/listings">
             <h2 class="text-2xl font-bold mb-6 text-center text-gray-500">
                 Job Info
