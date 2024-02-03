@@ -44,12 +44,16 @@ class Router
     {
         $Requestmethod = $_SERVER['REQUEST_METHOD'];
 
+        if ($Requestmethod === 'POST' && isset($_POST['_method'])) {
+            $Requestmethod = strtoupper($_POST['_method']);
+        }
+
         foreach ($this->routes as $route) {
             $uriSegments = explode('/', trim($uri, '/'));
             $routeSegments = explode('/', trim($route['uri'], '/'));
             $match = true;
 
-            if (count($uriSegments) === count($routeSegments) && $route['method'] === $Requestmethod) {
+            if (count($uriSegments) === count($routeSegments) && $route['method'] === strtoupper($Requestmethod)) {
                 $params = [];
                 $match = true;
 
