@@ -28,7 +28,6 @@ class Database
     {
         try {
             $stmt = $this->conn->prepare($query);
-
             foreach ($params as $key => $value) {
                 $stmt->bindValue(':' . $key, $value);
             }
