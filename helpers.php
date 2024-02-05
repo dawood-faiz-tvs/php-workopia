@@ -63,6 +63,11 @@ function placeholder($field)
     return ":{$field}";
 }
 
+function updatePlaceholder($field)
+{
+    return "{$field} = :{$field}";
+}
+
 function nullable($input)
 {
     return $input === "" ? NULL : $input;

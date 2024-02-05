@@ -169,10 +169,8 @@ class ListingController
             ]);
         } else {
             $fieldsArray = array_keys($updatedData);
+            $fieldsArray = array_map('updatePlaceholder', $fieldsArray);
             $fields = implode(', ', $fieldsArray);
-
-            $valuesArray = array_map('placeholder', $fieldsArray);
-            $values = implode(', ', $valuesArray);
 
             $updatedData = array_map('nullable', $updatedData);
             $updatedData['id'] = $id;
@@ -181,7 +179,7 @@ class ListingController
             $this->db->query($query, $updatedData);
             $_SESSION['success_message'] = 'Listing updated successfully!';
 
-            redirect('listings');
+            redirect('/listings');
         }
     }
 }
