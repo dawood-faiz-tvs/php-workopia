@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use Framework\Database;
 use Framework\Validation;
+use Framework\Session;
 
 class ListingController
 {
@@ -77,7 +78,7 @@ class ListingController
         }
 
         $this->db->query('DELETE FROM listings WHERE id = :id', $params);
-        $_SESSION['success_message'] = 'Listing deleted successfully!';
+        Session::set('success_message', 'Listing deleted successfully!');
 
         redirect('/listings');
     }
@@ -126,7 +127,7 @@ class ListingController
 
         $query = "INSERT INTO listings ({$fields}) VALUES ({$values})";
         $this->db->query($query, $newListingData);
-        $_SESSION['success_message'] = 'Listing created successfully!';
+        Session::set('success_message', 'Listing created successfully!');
 
         redirect('listings/create');
     }
@@ -180,7 +181,7 @@ class ListingController
 
         $query = "UPDATE listings SET {$fields} WHERE id = :id";
         $this->db->query($query, $updatedData);
-        $_SESSION['success_message'] = 'Listing updated successfully!';
+        Session::set('success_message', 'Listing updated successfully!');
 
         redirect('/listings');
     }

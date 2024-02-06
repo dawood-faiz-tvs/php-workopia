@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use Framework\Database;
 use Framework\Validation;
+use Framework\Session;
 
 class UserController
 {
@@ -103,8 +104,17 @@ class UserController
 
         $query = "INSERT INTO users ({$fields}) VALUES ({$values})";
         $this->db->query($query, $userData);
+        $userId = $this->db->conn->lastInsertId();
 
-        $_SESSION['success_message'] = 'User registered successfully!';
+        Session::set('success_message', 'User registered successfully!');
+        Session::set('user', [
+            'id' => $userId,
+            'name' => $name,
+            'email' => $email,
+            'city' => $city,
+            'state' => $state
+        ]);
+
         redirect('/auth/login');
     }
 }
