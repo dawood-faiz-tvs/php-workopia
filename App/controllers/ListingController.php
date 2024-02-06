@@ -113,21 +113,22 @@ class ListingController
                 'errors' => $errors,
                 'listing' => $newListingData
             ]);
-        } else {
-            $fieldsArray = array_keys($newListingData);
-            $fields = implode(', ', $fieldsArray);
-
-            $valuesArray = array_map('placeholder', $fieldsArray);
-            $values = implode(', ', $valuesArray);
-
-            $newListingData = array_map('nullable', $newListingData);
-
-            $query = "INSERT INTO listings ({$fields}) VALUES ({$values})";
-            $this->db->query($query, $newListingData);
-            $_SESSION['success_message'] = 'Listing created successfully!';
-
-            redirect('listings/create');
+            exit;
         }
+
+        $fieldsArray = array_keys($newListingData);
+        $fields = implode(', ', $fieldsArray);
+
+        $valuesArray = array_map('placeholder', $fieldsArray);
+        $values = implode(', ', $valuesArray);
+
+        $newListingData = array_map('nullable', $newListingData);
+
+        $query = "INSERT INTO listings ({$fields}) VALUES ({$values})";
+        $this->db->query($query, $newListingData);
+        $_SESSION['success_message'] = 'Listing created successfully!';
+
+        redirect('listings/create');
     }
 
     public function update($params)
@@ -167,19 +168,20 @@ class ListingController
                 'errors' => $errors,
                 'listing' => $listing
             ]);
-        } else {
-            $fieldsArray = array_keys($updatedData);
-            $fieldsArray = array_map('updatePlaceholder', $fieldsArray);
-            $fields = implode(', ', $fieldsArray);
-
-            $updatedData = array_map('nullable', $updatedData);
-            $updatedData['id'] = $id;
-
-            $query = "UPDATE listings SET {$fields} WHERE id = :id";
-            $this->db->query($query, $updatedData);
-            $_SESSION['success_message'] = 'Listing updated successfully!';
-
-            redirect('/listings');
+            exit;
         }
+
+        $fieldsArray = array_keys($updatedData);
+        $fieldsArray = array_map('updatePlaceholder', $fieldsArray);
+        $fields = implode(', ', $fieldsArray);
+
+        $updatedData = array_map('nullable', $updatedData);
+        $updatedData['id'] = $id;
+
+        $query = "UPDATE listings SET {$fields} WHERE id = :id";
+        $this->db->query($query, $updatedData);
+        $_SESSION['success_message'] = 'Listing updated successfully!';
+
+        redirect('/listings');
     }
 }
