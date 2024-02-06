@@ -8,10 +8,16 @@
         <?= loadPartial("message") ?>
         <form method="POST" action="/auth/login">
             <div class="mb-4">
-                <input type="email" name="email" placeholder="Email Address" class="w-full px-4 py-2 border rounded focus:outline-none" />
+                <input type="email" name="email" placeholder="Email Address" class="w-full px-4 py-2 border rounded focus:outline-none" value="<?= $user['email'] ?? '' ?>" />
+                <div class="message bg-red-100 my-3 px-4 py-4">
+                    <?= $errors['email'] ?? '' ?>
+                </div>
             </div>
             <div class="mb-4">
                 <input type="password" name="password" placeholder="Password" class="w-full px-4 py-2 border rounded focus:outline-none" />
+                <div class="message bg-red-100 my-3 px-4 py-4">
+                    <?= $errors['password'] ?? '' ?>
+                </div>
             </div>
             <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded focus:outline-none">
                 Login

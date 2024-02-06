@@ -42,7 +42,7 @@ class UserController
         }
 
         if (!Validation::email($email)) {
-            $errors['email'] = 'Please enter  a valid email address!';
+            $errors['email'] = 'Please enter a valid email address!';
         }
 
         if (!Validation::string($password, 6, 50)) {
@@ -125,5 +125,57 @@ class UserController
 
         setcookie('PHPSESSID', '', time() - 86400, $cookieParams['path'], $cookieParams['domain']);
         redirect('/auth/login');
+    }
+
+    public function authenticate()
+    {
+        $email = $_POST['email'];
+        $password  = $_POST['password'];
+
+        $errors = [];
+
+        if (!Validation::string($password)) {
+            $errors['password'] = 'Please enter a password!';
+        }
+
+        if (!Validation::email($email)) {
+            $errors['email'] = 'Please enter a valid email address!';
+        }
+
+        if (!empty($errors)) {
+            loadView("users/login", [
+                'errors' => $errors,
+                'user' => [
+                    'email' => $email
+                ]
+            ]);
+            exit;
+        }
+
+        $params = [
+            'email' => $email
+        ];
+
+        $user = $this->db->query('SELECT * FROM users WHERE email = :email', $params)->fetch();
+
+        if (!$user) {
+            Session::set('error_message', 'Invalid credentials!');
+            redirect('/auth/login');
+        }
+
+        if (!password_verify($password, $user->password)) {
+            Session::set('error_message', 'Invalid credentials!');
+            redirect('/auth/login');
+        }
+
+        Session::set('user', [
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'city' => $user->city,
+            'state' => $user->state
+        ]);
+
+        redirect('/');
     }
 }
