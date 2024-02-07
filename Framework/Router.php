@@ -3,12 +3,13 @@
 namespace Framework;
 
 use App\Controllers\ErrorController;
+use Framework\Middleware\Authorize;
 
 class Router
 {
     protected $routes = [];
 
-    public function resiterRoute($method, $uri, $action)
+    public function resiterRoute($method, $uri, $action, $middlewares)
     {
         list($controller, $controllerMethod) = explode('@', $action);
 
@@ -16,28 +17,29 @@ class Router
             'method' => $method,
             'uri' => $uri,
             'controller' => $controller,
-            'controllerMethod' => $controllerMethod
+            'controllerMethod' => $controllerMethod,
+            'middlewares' => $middlewares,
         ];
     }
 
-    public function get($uri, $controller)
+    public function get($uri, $controller, $middlewares = [])
     {
-        $this->resiterRoute('GET', $uri, $controller);
+        $this->resiterRoute('GET', $uri, $controller, $middlewares);
     }
 
-    public function post($uri, $controller)
+    public function post($uri, $controller, $middlewares = [])
     {
-        $this->resiterRoute('POST', $uri, $controller);
+        $this->resiterRoute('POST', $uri, $controller, $middlewares);
     }
 
-    public function put($uri, $controller)
+    public function put($uri, $controller, $middlewares = [])
     {
-        $this->resiterRoute('PUT', $uri, $controller);
+        $this->resiterRoute('PUT', $uri, $controller, $middlewares);
     }
 
-    public function delete($uri, $controller)
+    public function delete($uri, $controller, $middlewares = [])
     {
-        $this->resiterRoute('DELETE', $uri, $controller);
+        $this->resiterRoute('DELETE', $uri, $controller, $middlewares);
     }
 
     public function route($uri)
@@ -69,6 +71,10 @@ class Router
                 }
 
                 if ($match) {
+                    foreach ($route['middlewares'] as $role) {
+                        (new Authorize())->handle($role);
+                    }
+
                     $controller = 'App\\Controllers\\' . $route['controller'];
                     $controllerMethod = $route['controllerMethod'];
 
