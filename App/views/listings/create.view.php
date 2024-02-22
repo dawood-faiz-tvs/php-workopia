@@ -2,6 +2,7 @@
 <?= loadPartial("navbar") ?>
 <?= loadPartial("top-banner") ?>
 
+
 <!-- Job Listings -->
 <!-- Post a Job Form Box -->
 <section class="flex justify-center items-center mt-20">

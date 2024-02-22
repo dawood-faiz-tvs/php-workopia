@@ -2,15 +2,14 @@
 
 use Framework\Session; ?>
 
-<?php if (Session::has('success_message')) : ?>
+<?php if ($successMessage = Session::getFlashMessage('success_message')) : ?>
     <div class="text-center message bg-green-100 px-4 py-6 my-3">
-        <?= Session::get('success_message') ?>
+        <?= $successMessage ?>
     </div>
-    <?php Session::clear('success_message'); ?>
 <?php endif; ?>
-<?php if (Session::has('error_message')) : ?>
+
+<?php if ($errorMessage = Session::getFlashMessage('error_message')) : ?>
     <div class="text-center message bg-red-100 px-4 py-6 my-3">
-        <?= Session::get('error_message') ?>
+        <?= $errorMessage ?>
     </div>
-    <?php Session::clear('error_message'); ?>
 <?php endif; ?>

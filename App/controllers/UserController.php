@@ -106,7 +106,7 @@ class UserController
         $this->db->query($query, $userData);
         $userId = $this->db->conn->lastInsertId();
 
-        Session::set('success_message', 'User registered successfully!');
+        Session::setFlashMessage('success_message', 'User registered successfully!');
         Session::set('user', [
             'id' => $userId,
             'name' => $name,
@@ -159,12 +159,12 @@ class UserController
         $user = $this->db->query('SELECT * FROM users WHERE email = :email', $params)->fetch();
 
         if (!$user) {
-            Session::set('error_message', 'Invalid credentials!');
+            Session::setFlashMessage('error_message', 'Invalid credentials!');
             redirect('/auth/login');
         }
 
         if (!password_verify($password, $user->password)) {
-            Session::set('error_message', 'Invalid credentials!');
+            Session::setFlashMessage('error_message', 'Invalid credentials!');
             redirect('/auth/login');
         }
 
